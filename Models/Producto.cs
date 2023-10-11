@@ -4,6 +4,7 @@ namespace CRUDMVC.Models
 {
     public class Producto
     {
+        [Key]
         public int IdProducto { get; set; }
         [Required]
         public string Nombre { get; set;}
