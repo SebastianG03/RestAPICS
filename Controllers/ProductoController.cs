@@ -60,9 +60,17 @@ namespace RestAPI.Controllers
         }
 
         // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{IdProducto}")]
+        public async Task<IActionResult> Delete(int IdProducto)
         {
+            Producto producto = await _db.Producto.FirstOrDefaultAsync(x => x.IdProducto == IdProducto);
+            if (producto != null)
+            {
+                _db.Producto.Remove(producto); 
+                await _db.SaveChangesAsync();
+                return NoContent();
+            }
+            return BadRequest();
         }
     }
 }
