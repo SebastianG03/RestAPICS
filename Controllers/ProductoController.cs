@@ -54,9 +54,23 @@ namespace RestAPI.Controllers
         }
 
         // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{IdProducto}")]
+        public async Task<IActionResult> Put(int IdProducto, [FromBody] Producto producto)
         {
+            Producto producto2 = await _db.Producto.FirstOrDefaultAsync(x => x.IdProducto == IdProducto);
+
+            if (producto2 != null)
+            {
+                producto2.Nombre = producto.Nombre !=null ? producto.Nombre : producto2.Nombre;
+                producto2.Descripcion = producto.Descripcion != null ? producto.Descripcion : producto2.Descripcion;
+                producto2.Cantidad = producto.Cantidad != null ? producto.Cantidad: producto2.Cantidad;
+                _db.Producto.Update(producto2);
+                await _db.SaveChangesAsync();
+                return Ok(producto2);
+
+            }
+
+            return BadRequest("El producto no existe");
         }
 
         // DELETE api/<ValuesController>/5
