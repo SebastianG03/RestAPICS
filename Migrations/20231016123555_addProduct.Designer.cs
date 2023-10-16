@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestAPI.Data;
 
@@ -10,9 +11,11 @@ using RestAPI.Data;
 namespace RestAPI.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231016123555_addProduct")]
+    partial class addProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,6 @@ namespace RestAPI.Migrations
                             Cantidad = 12,
                             Descripcion = "Desc",
                             Nombre = "Producto1"
-                        },
-                        new
-                        {
-                            IdProducto = 13,
-                            Cantidad = 10,
-                            Descripcion = "Desc2",
-                            Nombre = "Producto2"
                         });
                 });
 #pragma warning restore 612, 618
